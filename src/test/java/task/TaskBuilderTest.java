@@ -1,7 +1,6 @@
 package task;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -75,7 +74,9 @@ public class TaskBuilderTest {
 	@Test
 	public void testValidPlaceC() throws Exception {
 		ICommand command = taskBuilder.apply("PLACE 4,2,EAST");
-		assertNotEquals(new Position(2, 4, Direction.WEST).toString(), command.execute(this.position).toString());
+		boolean position = new Position(2, 4, Direction.WEST).toString()
+				.equalsIgnoreCase(command.execute(this.position).toString());
+		assertTrue("Position of robot should be different than position value.", !position);
 	}
 
 	@Test
