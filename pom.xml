@@ -14,8 +14,27 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-         </plugins>
-         
+	        <plugin>
+	       		<groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-resources-plugin</artifactId>
+	            <version>2.7</version>
+	        </plugin>
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-jar-plugin</artifactId>
+	            <version>2.6</version>
+	            <configuration>
+		           	<!-- <excludes>
+						<exclude>**/log4j.properties</exclude> <!- Exclude log4j property file from Jar ->
+					</excludes> -->
+		            <archive>
+		                 <manifest>
+		                    <mainClass>rea.toyrobot.RobotExecutor</mainClass>
+		                 </manifest>
+		            </archive>
+	            </configuration>
+	        </plugin>
+        </plugins>
   </build>
   <dependencies>
 	<dependency>
