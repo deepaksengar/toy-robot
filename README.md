@@ -1,4 +1,7 @@
 # toy-robot
+
+[![Build Status](https://travis-ci.org/deepaksengar/toy-robot.svg?branch=master)](https://travis-ci.org/deepaksengar/toy-robot)
+
 The application is a simulation of a toy robot moving on a square tabletop, of dimensions 5x5. Toy robot accepts PLACE, MOVE, LEFT, RIGHT and REPORT command. It must be Placed first, then only it can execute further commands.
 
 Execution Instruction:
