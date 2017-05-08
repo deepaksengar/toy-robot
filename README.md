@@ -9,7 +9,7 @@ Execution Instruction:
 	Use toy-robot jar to execute this application.
     
     1) java -jar toy-robot.jar
-        User will have provide inputs.
+        User will have to provide commands.
     2) java -jar toy-robot.jar /path/txt-file-with-commands
         This will execute all commands from file.
 		
