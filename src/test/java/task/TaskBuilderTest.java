@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import rea.toyrobot.builder.TaskBuilder;
-import rea.toyrobot.errorutility.IllegalTaskArgument;
 import rea.toyrobot.model.position.Direction;
 import rea.toyrobot.model.position.Position;
 import rea.toyrobot.tasks.ICommand;
@@ -80,6 +79,18 @@ public class TaskBuilderTest {
 	}
 
 	@Test
+	public void testValidPlaceD() throws Exception {
+		ICommand command = taskBuilder.apply("PLACE 4,2,EAST");
+		ICommand command2 = taskBuilder.apply("PLACE 2,1,NORTH");
+		Position position = (Position) command.execute(this.position);
+		Position newPosition = (Position) command2.execute(position);
+		boolean value = new Position(2, 4, Direction.WEST).toString()
+				.equalsIgnoreCase(command.execute(this.position).toString());
+		assertEquals("Robot will be placed at new Position.", new Position(2, 1, Direction.NORTH).toString(),
+				command2.execute(position).toString());
+	}
+
+	@Test
 	public void testInvalidPosition() throws Exception {
 		ICommand command = taskBuilder.apply("PLACE4,2,EAST");
 		assertEquals(this.position.toString(), command.execute(this.position).toString());
@@ -93,14 +104,8 @@ public class TaskBuilderTest {
 
 	@Test
 	public void testInvalidPosition2() throws Exception {
-		try {
-			ICommand command = taskBuilder.apply("PLACE 4,2,WRONG-DIRECTION");
-			assertEquals(this.position.toString(), command.execute(this.position).toString());
-
-			// fail("Should throw IllegalTaskException.");
-		} catch (IllegalTaskArgument ex) {
-
-		}
+		ICommand command = taskBuilder.apply("PLACE 4,2,WRONG-DIRECTION");
+		assertEquals(this.position.toString(), command.execute(this.position).toString());
 
 	}
 

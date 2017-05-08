@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>rea.toyrobot</groupId>
   <artifactId>toy-robot</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
   <build>
         <plugins>
             <plugin>
@@ -24,9 +24,9 @@
 	            <artifactId>maven-jar-plugin</artifactId>
 	            <version>2.6</version>
 	            <configuration>
-		           	<!-- <excludes>
-						<exclude>**/log4j.properties</exclude> <!- Exclude log4j property file from Jar ->
-					</excludes> -->
+		           	<excludes>
+						<exclude>**/log4j.properties</exclude> <!-- Exclude log4j property file from Jar -->
+					</excludes>
 		            <archive>
 		                 <manifest>
 		                    <mainClass>rea.toyrobot.RobotExecutor</mainClass>
@@ -34,6 +34,27 @@
 		            </archive>
 	            </configuration>
 	        </plugin>
+	        <plugin>
+	        	<artifactId>maven-assembly-plugin</artifactId>
+		        <executions>
+		          <execution>
+		            <phase>package</phase>
+		            <goals>
+		              <goal>single</goal>
+		            </goals>
+		          </execution>
+		        </executions>
+		        <configuration>
+		          <descriptorRefs>
+		            <descriptorRef>jar-with-dependencies</descriptorRef>
+		          </descriptorRefs>
+		          <archive>
+		                 <manifest>
+		                    <mainClass>rea.toyrobot.RobotExecutor</mainClass>
+		                 </manifest>
+		            </archive>
+		        </configuration>
+	      </plugin>
         </plugins>
   </build>
   <dependencies>

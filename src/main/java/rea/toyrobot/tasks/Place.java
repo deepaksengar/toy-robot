@@ -20,10 +20,10 @@ public class Place implements ICommand<Position> {
 
 	@Override
 	public Position execute(Position position) {
-		if (position == null)
-			return this.getPosition();
-		else
-			return position;
+		// if (position == null)
+		return this.getPosition();
+		// else
+		// return position;
 	}
 
 	public Position getPosition() {
