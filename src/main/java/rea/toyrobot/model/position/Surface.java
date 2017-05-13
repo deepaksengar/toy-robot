@@ -31,4 +31,18 @@ public class Surface {
 	public void setPosition(Position position) {
 		this.position = position;
 	}
+
+	public static Surface createSurface(int length, int width) {
+
+		int initialX = 0;
+		int initialY = 0;
+
+		int edgeX = length - 1;
+		int edgeY = width - 1;
+
+		Coordinate initial = new Coordinate(initialX, initialY);
+		Coordinate edge = new Coordinate(edgeX, edgeY);
+
+		return new Surface(initial, edge);
+	}
 }

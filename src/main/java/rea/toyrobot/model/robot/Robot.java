@@ -34,11 +34,13 @@ public class Robot implements IRobot {
 		if (command.getClass().getSimpleName().equalsIgnoreCase(Tasks.PLACE.name())) {
 			this.setStatus(Status.RUNNING);
 		}
-		if (this.status == Status.RUNNING) {
-			this.setPosition((Position) command.execute(this.getPosition()));
-		} else {
+
+		if (this.status == Status.IDLE) {
 			logger.debug("Robot is " + this.status.name() + " . Cannot do Task.");
+			return;
 		}
+
+		this.setPosition((Position) command.execute(this.getPosition()));
 	}
 
 	private boolean isValidPosition(Position newPosition) {
@@ -58,19 +60,19 @@ public class Robot implements IRobot {
 	}
 
 	public Position getPosition() {
-		return position;
+		return this.position;
 	}
 
 	public void setPosition(Position position) {
-		if (isValidPosition(position)) {
-			this.position = position;
-		} else {
+		if (!isValidPosition(position)) {
 			logger.error("Incorrect Position : " + position + " . Going out of Surface. Not setting wrong position.");
+			return;
 		}
+
+		this.position = position;
 	}
 
 	public Surface getSurface() {
-		return surface;
+		return this.surface;
 	}
-
 }

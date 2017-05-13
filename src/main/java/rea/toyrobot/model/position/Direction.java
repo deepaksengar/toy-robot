@@ -1,7 +1,5 @@
 package rea.toyrobot.model.position;
 
-import rea.toyrobot.errorutility.IllegalDirectionArgument;
-
 public enum Direction {
 
 	EAST, WEST, NORTH, SOUTH;
@@ -17,7 +15,7 @@ public enum Direction {
 		case WEST:
 			return SOUTH;
 		default:
-			throw new IllegalDirectionArgument("Unknown Direction : " + this);
+			return this;
 		}
 	}
 
@@ -32,7 +30,7 @@ public enum Direction {
 		case WEST:
 			return NORTH;
 		default:
-			throw new IllegalDirectionArgument("Orientation unknown: " + this);
+			return this;
 		}
 	}
 

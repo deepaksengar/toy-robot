@@ -84,10 +84,8 @@ public class TaskBuilderTest {
 		ICommand command2 = taskBuilder.apply("PLACE 2,1,NORTH");
 		Position position = (Position) command.execute(this.position);
 		Position newPosition = (Position) command2.execute(position);
-		boolean value = new Position(2, 4, Direction.WEST).toString()
-				.equalsIgnoreCase(command.execute(this.position).toString());
 		assertEquals("Robot will be placed at new Position.", new Position(2, 1, Direction.NORTH).toString(),
-				command2.execute(position).toString());
+				newPosition.toString());
 	}
 
 	@Test
@@ -106,7 +104,12 @@ public class TaskBuilderTest {
 	public void testInvalidPosition2() throws Exception {
 		ICommand command = taskBuilder.apply("PLACE 4,2,WRONG-DIRECTION");
 		assertEquals(this.position.toString(), command.execute(this.position).toString());
-
 	}
+
+	// @Test
+	// public void testParseDirection() throws Exception {
+	// Direction val = this.taskBuilder.parseDirection("NORTH");
+	// assertEquals("NORTH", val.name());
+	// }
 
 }

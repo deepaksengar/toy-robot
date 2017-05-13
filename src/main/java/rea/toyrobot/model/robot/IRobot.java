@@ -7,6 +7,5 @@ public interface IRobot {
 
 	Status getStatus();
 
-	@SuppressWarnings("rawtypes")
-	void doTask(ICommand command);
+	<R> void doTask(ICommand<R> command);
 }
