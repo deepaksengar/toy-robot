@@ -42,30 +42,14 @@ public class Robot implements IRobot {
 
 		this.setPosition((Position) command.execute(this.getPosition()));
 	}
-
-	private boolean isValidPosition(Position newPosition) {
-		int initX = this.getSurface().getInitialBoundry().getX();
-		int initY = this.getSurface().getInitialBoundry().getY();
-		int edgeX = this.getSurface().getEdgeBoundry().getX();
-		int edgeY = this.getSurface().getEdgeBoundry().getY();
-
-		int currentX = newPosition.getCoordinate().getX();
-		int currentY = newPosition.getCoordinate().getY();
-
-		if (initX <= currentX && edgeX >= currentX && initY <= currentY && edgeY >= currentY) {
-			return true;
-		}
-
-		return false;
-	}
-
+	
 	public Position getPosition() {
 		return this.position;
 	}
 
 	public void setPosition(Position position) {
-		if (!isValidPosition(position)) {
-			logger.error("Incorrect Position : " + position + " . Going out of Surface. Not setting wrong position.");
+		if (!this.surface.isValidPositionOnSurface(position)) {
+			logger.error("Incorrect Position : " + position + " on Surface. Not setting wrong position.");
 			return;
 		}
 

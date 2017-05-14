@@ -95,9 +95,9 @@ public class TaskBuilderTest {
 	}
 
 	@Test
-	public void testInvalidPosition1() throws Exception {
-		ICommand command = taskBuilder.apply("PLACE 4, 2,EAST");
-		assertEquals(this.position.toString(), command.execute(this.position).toString());
+	public void testValidPositionWithSpaces() throws Exception {
+		ICommand command = taskBuilder.apply("PLACE 4, 2, east");
+		assertEquals((new Position(4, 2, Direction.EAST)).toString(), command.execute(this.position).toString());
 	}
 
 	@Test

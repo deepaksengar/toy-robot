@@ -16,8 +16,7 @@ public class Place implements ICommand<Position> {
 
 	private Position position;
 
-	private static final Pattern PLACE_COMMAND_REGEX = Pattern.compile(Tasks.PLACE.name() + " (\\d+),(\\d+),(\\w+)");
-	private static Pattern whitespace = Pattern.compile("\\s\\s");
+	private static final Pattern PLACE_COMMAND_REGEX = Pattern.compile(Tasks.PLACE.name() + "[\\s]+(\\d+)[\\s]*,[\\s]*(\\d+)[\\s]*,[\\s]*(\\w+)[\\s]*");
 
 	public Place(int x, int y, Direction direction) {
 		this(new Position(x, y, direction));
@@ -64,8 +63,8 @@ public class Place implements ICommand<Position> {
 	private Position placeCommand(Matcher matcher) {
 		debugLog("Position : " + matcher.group(1) + "," + matcher.group(2) + "," + matcher.group(3));
 		try {
-			return getPosition(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)),
-					this.parseDirection(matcher.group(3)));
+			return getPosition(Integer.parseInt(matcher.group(1).trim().toUpperCase()), Integer.parseInt(matcher.group(2).trim()),
+					this.parseDirection(matcher.group(3).trim().toUpperCase()));
 		} catch (IllegalDirectionArgument | IllegalTaskArgument | NullPointerException ex) {
 			errorLog(ex.getMessage());
 			throw ex;

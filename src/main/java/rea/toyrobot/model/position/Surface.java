@@ -45,4 +45,20 @@ public class Surface {
 
 		return new Surface(initial, edge);
 	}
+	
+	public boolean isValidPositionOnSurface(Position newPosition) {
+		int initX = this.getInitialBoundry().getX();
+		int initY = this.getInitialBoundry().getY();
+		int edgeX = this.getEdgeBoundry().getX();
+		int edgeY = this.getEdgeBoundry().getY();
+
+		int currentX = newPosition.getCoordinate().getX();
+		int currentY = newPosition.getCoordinate().getY();
+
+		if (initX <= currentX && edgeX >= currentX && initY <= currentY && edgeY >= currentY) {
+			return true;
+		}
+
+		return false;
+	}
 }
