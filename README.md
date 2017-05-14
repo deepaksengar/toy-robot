@@ -7,8 +7,11 @@ The application is a simulation of a toy robot moving on a square tabletop, of d
 Execution Instruction:
 ---------------------
 
-	To build the code and remove all older builds and jars :
+	To remove all older builds and jars :
 	-	mvn clean
+	
+	To build the code and run tests :
+	-	mvn clean install
 	
 	To create a package which will create executable Jar along with all dependencies, execute :
 	-	mvn clean dependency:copy-dependencies package
