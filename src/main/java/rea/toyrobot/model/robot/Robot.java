@@ -2,8 +2,8 @@ package rea.toyrobot.model.robot;
 
 import org.apache.log4j.Logger;
 
+import rea.toyrobot.model.position.ISurface;
 import rea.toyrobot.model.position.Position;
-import rea.toyrobot.model.position.Surface;
 import rea.toyrobot.model.status.Status;
 import rea.toyrobot.tasks.ICommand;
 import rea.toyrobot.tasks.Tasks;
@@ -14,9 +14,9 @@ public class Robot implements IRobot {
 
 	private Status status = Status.IDLE;
 	private Position position;
-	private final Surface surface;
+	private final ISurface surface;
 
-	public Robot(Surface surface) {
+	public Robot(ISurface surface) {
 		this.surface = surface;
 	}
 
@@ -56,7 +56,7 @@ public class Robot implements IRobot {
 		this.position = position;
 	}
 
-	public Surface getSurface() {
+	public ISurface getSurface() {
 		return this.surface;
 	}
 }

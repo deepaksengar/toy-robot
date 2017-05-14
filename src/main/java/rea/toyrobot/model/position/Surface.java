@@ -1,19 +1,14 @@
 package rea.toyrobot.model.position;
 
-public class Surface {
-	private final Coordinate initialBoundry;
-	private final Coordinate edgeBoundry;
-	private Position position;
+public class Surface implements ISurface {
+	private Coordinate initialBoundry;
+	private Coordinate edgeBoundry;
+	
+	public Surface(){}
 
 	public Surface(final Coordinate initial, final Coordinate edge) {
 		this.initialBoundry = initial;
 		this.edgeBoundry = edge;
-	}
-
-	public Surface(final Coordinate initial, final Coordinate edge, final Position position) {
-		this.initialBoundry = initial;
-		this.edgeBoundry = edge;
-		this.position = position;
 	}
 
 	public Coordinate getInitialBoundry() {
@@ -24,15 +19,7 @@ public class Surface {
 		return edgeBoundry;
 	}
 
-	public Position getPosition() {
-		return position;
-	}
-
-	public void setPosition(Position position) {
-		this.position = position;
-	}
-
-	public static Surface createSurface(int length, int width) {
+	public Surface createSurface(int length, int width) {
 
 		int initialX = 0;
 		int initialY = 0;
@@ -46,6 +33,7 @@ public class Surface {
 		return new Surface(initial, edge);
 	}
 	
+	@Override
 	public boolean isValidPositionOnSurface(Position newPosition) {
 		int initX = this.getInitialBoundry().getX();
 		int initY = this.getInitialBoundry().getY();
