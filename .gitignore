@@ -1,4 +1,4 @@
 /target/
 /logs/
 /toy-robot.jar
-/org.eclipse.jdt.core.prefs
+/.settings
