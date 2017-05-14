@@ -36,7 +36,7 @@ public class RobotExecutor {
 		TaskBuilder taskBuilder = new TaskBuilder();
 
 		commands.forEach(command -> {
-			this.getRobot().doTask(taskBuilder.apply(command.trim().toUpperCase()));
+			this.getRobot().doTask(taskBuilder.apply(command));
 		});
 	}
 
@@ -48,18 +48,21 @@ public class RobotExecutor {
 		}
 
 		List<String> commands;
-		if (args.length == 0) {
-			commands = consoleInput();
-		} else if (args.length == 1) {
-			commands = fileInput(args[0]);
-		} else {
-			commands = new ArrayList<>();
-			logger.error("No tasks found for Robot to execute.");
+		
+		switch(args.length){
+			case 1 : commands = fileInput(args[0]);
+					break;
+			default :
+					commands = consoleInput();
 		}
-
+		
+		commands = commands.stream().filter(s-> !s.isEmpty())
+					.map(s->s.trim().toUpperCase()).collect(Collectors.toList());
+		
 		executor.run(commands);
 	}
 
+	
 	private static List<String> fileInput(String path) {
 		try {
 			return Files.lines(Paths.get(path)).collect(Collectors.toList());
@@ -70,29 +73,23 @@ public class RobotExecutor {
 	}
 
 	private static List<String> consoleInput() {
-		Scanner scanner = new Scanner(System.in);
+		
 		List<String> result = new ArrayList<>();
 
 		System.out.println("Toy Robot...");
 		System.out.println("To see final result enter REPORT.");
 		System.out.println("Please enter commands:");
-
-		try {
+		
+		try (Scanner scanner = new Scanner(System.in)) {
 			while (scanner.hasNext()) {
-				String input = scanner.nextLine().trim();
+				String inputStr = scanner.nextLine();
+				result.add(inputStr);
 
-				if (input == null || "".equalsIgnoreCase(input))
-					break;
-
-				result.add(input);
-
-				if ("Report".equalsIgnoreCase(input))
+				if ("Report".equalsIgnoreCase(inputStr))
 					break;
 			}
-		} finally {
-			scanner.close();
 		}
-
+		
 		return result;
 	}
 

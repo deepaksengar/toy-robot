@@ -50,5 +50,4 @@ public class Position {
 		result = prime * result + (this.getDirection() != null ? this.getDirection().ordinal() * 13 : 0);
 		return result;
 	}
-
 }

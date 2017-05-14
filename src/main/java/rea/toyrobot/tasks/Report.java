@@ -13,5 +13,4 @@ public class Report implements ICommand<Position> {
 
 		return position;
 	}
-
 }

@@ -51,7 +51,7 @@ public class Place implements ICommand<Position> {
 
 	private Position parsePlaceCommand(String commandStr) {
 		debugLog("Parsing PLACE command : " + commandStr);
-		Matcher spaceMatcher = whitespace.matcher(commandStr);
+		
 		Matcher matcher = PLACE_COMMAND_REGEX.matcher(commandStr);
 
 		if (matcher.matches()) {
@@ -67,9 +67,6 @@ public class Place implements ICommand<Position> {
 			return getPosition(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)),
 					this.parseDirection(matcher.group(3)));
 		} catch (IllegalDirectionArgument | IllegalTaskArgument | NullPointerException ex) {
-			errorLog(ex.getMessage());
-			throw ex;
-		} catch (Exception ex) {
 			errorLog(ex.getMessage());
 			throw ex;
 		}
